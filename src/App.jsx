@@ -27,7 +27,9 @@ const [show,setshow] = useState(false);
 
      }}>제목 바꾸기</button>
      <div className="list">
-      <h4>{boardTitle[0]}<button onClick={()=>{ setLike(like+1);}}>좋아요</button>{like}</h4>
+      <h4>{boardTitle[0]}<button onClick={()=>{ 
+        setLike(like+1);
+        }}>좋아요</button>{like}</h4>
       <p>2025-07-16</p>
      </div>
      <div className="list">
@@ -35,7 +37,9 @@ const [show,setshow] = useState(false);
       <p>2025-07-16</p>
      </div>
      <div className="list">
-      <h4>{boardTitle[2]}</h4>
+      <h4 onClick={() =>{ 
+        setshow(!show)
+        }}>{boardTitle[2]}</h4>
       <p>2025-07-16</p>
      </div>
     
@@ -47,12 +51,14 @@ const [show,setshow] = useState(false);
     }}>첫번째 게시물 제목바꾸기</button>
 
     {show ? <Detail /> : ''}
-    //boardTitle[2]를 누르면 show가 보이게
+    
+    
 
 
 
     </div>
   )
+      
 }
 
 export default App
