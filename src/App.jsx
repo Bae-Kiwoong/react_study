@@ -10,38 +10,51 @@ function App() { // 첫글자는 대문자. 컴퍼넌트랑 이름은 같도록 
 // 변경 함수로 처리해야 실시간 반영할수 있음 
 //const[변수명,변경함수] = useState(초기값); use...가 리액트 내장함수 (리액트 훅)
 const [title,setTitle] = useState('게시판1111');
-const [boardTitle,setBoardTitle] = useState(['React','HTML','CSS']);
+const [boardTitle,setBoardTitle] = useState(['REACT','HTML','CSS']);
 
 
-const [like,setLike] = useState(0);
+const [like,setLike] = useState([0,0,0]);
 const [show,setshow] = useState(false);
+
+const [titleIndex, setTitleIndex] = useState(0);
+
+
 
 
   return (
     <div className='App'>
+    
      <div className='nav'>
       <h3>{title}</h3>
      </div>
      <button onClick={()=>{
       setTitle('게시판');
+    }}>제목 바꾸기</button>
 
-     }}>제목 바꾸기</button>
-     <div className="list">
-      <h4>{boardTitle[0]}<button onClick={()=>{ 
-        setLike(like+1);
-        }}>좋아요</button>{like}</h4>
-      <p>2025-07-16</p>
-     </div>
-     <div className="list">
-      <h4>{boardTitle[1]}</h4>
-      <p>2025-07-16</p>
-     </div>
-     <div className="list">
-      <h4 onClick={() =>{ 
-        setshow(!show)
-        }}>{boardTitle[2]}</h4>
-      <p>2025-07-16</p>
-     </div>
+    {
+    boardTitle.map(function(name , i){
+      return (
+      <div className="list" key={i}>
+          <h4 onClick={function(){
+            setshow(!show);
+            setTitleIndex(i);
+          }}>{name}<button onClick={function(e){
+           e.stopPropagation();
+            let _like = [...like];
+          _like[i] = _like[i] + 1;
+           setLike(_like);
+          }}>좋아요</button>{like[i]}</h4>
+          <p>2025-07-16</p>
+        </div>
+    )
+    })
+    }
+    
+
+
+    
+
+     
     
     <button onClick={()=>{//기존배열을 다른 변수로 옮겨도 주소값이 같기때문에 
       let _boardTitle = [...boardTitle];//배열을 터트리고 다시 묶어서 새주소값을 만듬
@@ -50,7 +63,7 @@ const [show,setshow] = useState(false);
       
     }}>첫번째 게시물 제목바꾸기</button>
 
-    {show ? <Detail /> : ''}
+    {show ? <Detail boardTitle = {boardTitle} setBoardTitle={setBoardTitle} titleIndex = {titleIndex} /> : ''}
     
     
 
