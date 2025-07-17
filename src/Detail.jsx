@@ -1,14 +1,8 @@
-function Detail({boardTitle,setBoardTitle,titleIndex}){
+function Detail({board,setBoard,titleIndex}){
   return (
     <div className="detail">
-      <button onClick={function(){
-        
-        let _boardTitle = [...boardTitle];
-        _boardTitle[0] = `aaaa`;
-        setBoardTitle(_boardTitle);
-
-      }}>제목바꿔주는 버튼</button>
-      <h4>{boardTitle[titleIndex]}</h4>
+      
+      <h4>{board[titleIndex].title}</h4>
       <p>날짜</p>
       <p>내용</p>
   </div>
